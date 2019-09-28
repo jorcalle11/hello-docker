@@ -11,10 +11,15 @@ const redisClient = redis.createClient({
 });
 const port = process.env.PORT || 3000;
 const REDIS_KEY = 'visits';
+const CRASH_SERVER = false;
 
 app.use('/', (req, res) => {
   const hostname = os.hostname();
   const homedir = os.homedir();
+
+  if (CRASH_SERVER) {
+    process.exit(1);
+  }
 
   redisClient.get(REDIS_KEY, (err, visits) => {
     const numberOfVisits = visits ? +visits : 0;
