@@ -5,5 +5,6 @@ services:
   node-app:
     restart: always
     build: .
+    image: jorcalle11/hello-docker:part2
     ports:
       - '3000:3000'
