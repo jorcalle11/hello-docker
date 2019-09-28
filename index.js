@@ -5,7 +5,10 @@ const redis = require('redis');
 const os = require('os');
 
 const app = express();
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({
+  // Pass the name of the service that you defined on the docker-compose.yml file
+  host: 'redis-server'
+});
 const port = process.env.PORT || 3000;
 const REDIS_KEY = 'visits';
 
