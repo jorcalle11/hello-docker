@@ -2,9 +2,21 @@ version: '3'
 services:
   redis-server:
     image: 'redis'
+    networks:
+      - webnet
   node-app:
     restart: always
     build: .
     image: jorcalle11/hello-docker:part2
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
     ports:
       - '3000:3000'
+    networks:
+      - webnet
+networks:
+  webnet:
